@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+data/surabaya_map.gpkg
+data/surabaya_map_build.gpkg
+data/stations.geojson
+data/residential_samples.geojson
+cache/

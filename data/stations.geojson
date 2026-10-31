@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "stations",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "station_id": "osm-way-452387333", "name": "Posko Pemadam Kebakaran", "category": "REAL-OSM", "source": "OpenStreetMap (amenity=fire_station)", "verification_status": "OSM-mapped; verify with the relevant authority" }, "geometry": { "type": "Point", "coordinates": [ 112.632905621284849, -7.303572899925562 ] } },
+{ "type": "Feature", "properties": { "station_id": "osm-way-459270806", "name": "Dinas Pemadam Kebakaran Kandangan", "category": "REAL-OSM", "source": "OpenStreetMap (amenity=fire_station)", "verification_status": "OSM-mapped; verify with the relevant authority" }, "geometry": { "type": "Point", "coordinates": [ 112.653194600003403, -7.252276600002313 ] } },
+{ "type": "Feature", "properties": { "station_id": "osm-way-460507505", "name": "Dinas Pemadam Kebakaran UPTD Surabaya V Pos Pakal", "category": "REAL-OSM", "source": "OpenStreetMap (amenity=fire_station)", "verification_status": "OSM-mapped; verify with the relevant authority" }, "geometry": { "type": "Point", "coordinates": [ 112.625410000002461, -7.240292850003175 ] } }
+]
+}
