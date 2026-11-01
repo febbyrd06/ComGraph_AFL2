@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101820">
+    <title>Surabaya Fire Coverage GIS</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">F</div>
+        <div>
+          <div class="eyebrow">GIS ANALYSIS · SURABAYA BARAT</div>
+          <h1>Fire-station coverage</h1>
+        </div>
+      </div>
+      <div class="status-wrap">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="data-status" role="status">Loading local GIS layers…</span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <section class="panel section-panel">
+          <div class="section-title"><span class="section-index">01</span><h2>Study layers</h2></div>
+          <label class="layer-row">
+            <span class="swatch swatch-network"></span><span class="layer-label">Road network</span>
+            <input id="toggle-roads" type="checkbox" checked>
+          </label>
+          <label class="layer-row">
+            <span class="swatch swatch-samples"></span><span class="layer-label">Synthetic samples</span>
+            <input id="toggle-samples" type="checkbox" checked>
+          </label>
+          <label class="layer-row">
+            <span class="swatch swatch-real"></span><span class="layer-label">OSM-mapped stations</span>
+            <input id="toggle-stations" type="checkbox" checked>
+          </label>
+          <label class="layer-row">
+            <span class="swatch swatch-proposed"></span><span class="layer-label">Proposed stations</span>
+            <input id="toggle-proposals" type="checkbox" checked>
+          </label>
+          <label class="layer-row">
+            <span class="swatch swatch-buffer-3"></span><span class="layer-label">3 km buffer</span>
+            <input id="toggle-buffer-3" type="checkbox">
+          </label>
+          <label class="layer-row">
+            <span class="swatch swatch-buffer-5"></span><span class="layer-label">5 km buffer</span>
+            <input id="toggle-buffer-5" type="checkbox">
+          </label>
+          <p class="panel-note">Buffers are straight-line distances in EPSG:32749, not road travel distances.</p>
+        </section>
+
+        <section class="panel section-panel">
+          <div class="section-title"><span class="section-index">02</span><h2>Map interaction</h2></div>
+          <div class="mode-buttons">
+            <button id="incident-mode" class="button button-primary" type="button">Select incident</button>
+            <button id="proposal-mode" class="button button-secondary" type="button">Add proposed</button>
+          </div>
+          <div class="proposal-actions">
+            <button id="reset-proposals" class="button button-quiet" type="button">Reset proposals</button>
+            <span id="proposal-count" class="count-pill">0 proposed</span>
+          </div>
+          <p id="interaction-hint" class="panel-note">Choose a mode, then click inside the study boundary.</p>
+          <div id="proposal-list" class="proposal-list"></div>
+        </section>
+
+        <section class="panel section-panel coverage-panel">
+          <div class="section-title"><span class="section-index">03</span><h2>Coverage comparison</h2></div>
+          <div class="coverage-head">
+            <span>Radius</span><span>Before</span><span>Scenario</span>
+          </div>
+          <div class="coverage-row" data-radius="3000">
+            <strong>3 km</strong><span class="before-value">—</span><span class="after-value">—</span>
+          </div>
+          <div class="coverage-row" data-radius="5000">
+            <strong>5 km</strong><span class="before-value">—</span><span class="after-value">—</span>
+          </div>
+          <p id="sample-count" class="panel-note">Coverage counts synthetic sample points, not residents.</p>
+        </section>
+
+        <section class="panel section-panel route-panel">
+          <div class="section-title"><span class="section-index">04</span><h2>OSRM route comparison</h2></div>
+          <p id="route-status" class="panel-note">Select an incident to compare returned routes.</p>
+          <div id="route-results" class="route-results"></div>
+          <p class="disclaimer">Estimated durations are not live traffic or emergency-response guarantees.</p>
+        </section>
+
+        <footer class="sidebar-footer">
+          <span class="legend-dot real"></span>OSM mapped
+          <span class="legend-dot proposed"></span>Hypothetical
+          <span class="legend-dot incident"></span>Incident
+        </footer>
+      </aside>
+
+      <section class="map-shell" aria-label="Interactive map of Surabaya Barat">
+        <div id="map"></div>
+        <div id="map-error" class="map-error" role="alert" hidden></div>
+        <div class="map-attribution">© OpenStreetMap contributors · Educational analysis only</div>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+  </body>
+</html>
